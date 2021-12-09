@@ -19,3 +19,5 @@ npm run dev
 - Open up neo4j browser
 - Type in server:connect into the search
 - Ensure connection data is correct, can be found in the .env
+
+[Neo4j Graphql Docs](https://neo4j.com/docs/graphql-manual/current/)
