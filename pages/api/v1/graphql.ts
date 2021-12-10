@@ -3,6 +3,7 @@ import { ApolloServer } from 'apollo-server-micro';
 import jwtUtils from 'utils/server/jwt';
 import driver from 'neo4j/driver';
 
+import generateTypes from 'graphql/generateTypes';
 import neoSchema from 'graphql/schema';
 
 import type { NextApiRequest, NextApiResponse } from 'next';
@@ -25,6 +26,12 @@ export default cors(async function handler(
     res.end();
     return false;
   }
+
+  // GENERATE TYPES IN DEV ENVIORNMENT
+  if (process.env.NODE_ENV === 'development') {
+    await generateTypes();
+  }
+
   // IMPORTANT FOR ENSURING UNIQUE CONSTRAINTS IN THE DB
   await neoSchema.assertIndexesAndConstraints({ options: { create: true } });
   await startServer;

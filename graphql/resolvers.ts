@@ -1,6 +1,4 @@
-import { OGM } from '@neo4j/graphql-ogm';
-import driver from 'neo4j/driver';
-import typeDefs from 'graphql/typeDefs';
+import ogm from 'graphql/ogm';
 import axios from 'axios';
 import crypto from 'crypto';
 import jwtUtils from 'utils/server/jwt';
@@ -9,9 +7,7 @@ import authenticationUtils from 'utils/server/authentication';
 import type { IResolvers } from '@graphql-tools/utils';
 
 const hash = crypto.createHash('sha1');
-const ogm = new OGM({ typeDefs, driver });
 const User = ogm.model('User');
-const Podcast = ogm.model('Podcast');
 
 const { PODCAST_KEY = '', PODCAST_SECRET = '' } = process.env;
 
